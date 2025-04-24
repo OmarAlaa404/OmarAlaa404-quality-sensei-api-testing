@@ -44,7 +44,7 @@ npm run dev
 ```
 
 3. Access the app at:
-👉 http://0.0.0.0:5000
+👉 http://localhost:5000
 
 ### 🔑 Default Credentials
 - Username: QualitySensei
