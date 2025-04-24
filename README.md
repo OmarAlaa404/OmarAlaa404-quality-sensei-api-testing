@@ -1,94 +1,115 @@
 
-# Quality Sensei API Testing Playground
+# Quality Sensei - API Testing Playground  
+A fullstack educational tool for learning and practicing API testing concepts, built using modern technologies including Express.js, React, and TypeScript.
 
-A fullstack educational tool for learning API testing concepts. Built with Express.js, React, and TypeScript.
+---
 
-## Features
+## ✨ Features
 
-- Interactive API testing interface
-- Swagger/OpenAPI documentation
-- Board management system
-- Authentication system
-- Modern UI with Tailwind CSS and Radix UI
+- 🔧 Interactive API testing interface  
+- 📘 Swagger/OpenAPI auto-generated documentation  
+- 🗂️ Board & card management system  
+- 🔐 Authentication & user management  
+- 🌈 Modern UI built with Tailwind CSS & Radix UI  
 
-## Getting Started
+---
 
-1. Clone the repository
-2. Install dependencies:
+## 🔧 Tech Stack
+
+- **Frontend Framework:** React 18  
+- **Type System:** TypeScript  
+- **Styling:** Tailwind CSS, Radix UI  
+- **Backend Framework:** Express.js  
+- **ORM & DB:** Drizzle ORM + PostgreSQL  
+- **API Docs:** Swagger/OpenAPI  
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher)  
+- npm (or yarn)
+
+### Installation
+
+1. Install dependencies:
 ```bash
 npm install
 ```
-3. Start the development server:
+
+2. Start the development server:
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:5000`
+3. Access the app at:
+👉 http://0.0.0.0:5000
 
-## Default Credentials
-
+### 🔑 Default Credentials
 - Username: QualitySensei
-- Password: 12345678
+- Password: (contact administrator)
 
-## API Endpoints
+## 📚 API Endpoints
 
-### Authentication
-- POST `/api/login` - Login and get token
-- POST `/api/register` - Register a new user
-- POST `/api/logout` - Logout current user
-- GET `/api/user` - Get current user info
+### 🧾 Authentication
+- POST `/api/login` – Login and receive token
+- POST `/api/register` – Register new user
+- POST `/api/logout` – Logout
+- GET `/api/user` – Get current user info
 
-### Boards
-- GET `/boards` - Get all boards
-- POST `/boards` - Create a new board
-- GET `/boards/{id}` - Get a single board
-- PUT `/boards/{id}` - Update a board
-- DELETE `/boards/{id}` - Delete a board
+### 📋 Boards
+- GET `/boards` – Get all boards
+- POST `/boards` – Create a new board
+- GET `/boards/{id}` – Get a specific board
+- PUT `/boards/{id}` – Update a board
+- DELETE `/boards/{id}` – Delete a board
 
-### Lists
-- GET `/boards/{boardId}/lists` - Get all lists for a board
-- POST `/boards/{boardId}/lists` - Create a new list
-- PUT `/boards/{boardId}/lists/{listId}` - Update a list
-- DELETE `/boards/{boardId}/lists/{listId}` - Delete a list
+### 🧩 Lists
+- GET `/boards/{boardId}/lists` – Lists in a board
+- POST `/boards/{boardId}/lists` – Create new list
+- PUT `/boards/{boardId}/lists/{listId}` – Update list
+- DELETE `/boards/{boardId}/lists/{listId}` – Delete list
 
-### Cards
-- GET `/lists/{listId}/cards` - Get all cards for a list
-- POST `/lists/{listId}/cards` - Create a new card
-- PATCH `/lists/{listId}/cards/{cardId}` - Update a card
-- DELETE `/lists/{listId}/cards/{cardId}` - Delete a card
+### 🃏 Cards
+- GET `/lists/{listId}/cards` – Cards in a list
+- POST `/lists/{listId}/cards` – Create new card
+- PATCH `/lists/{listId}/cards/{cardId}` – Update card
+- DELETE `/lists/{listId}/cards/{cardId}` – Delete card
 
-## Query Parameters
+## 🔎 Query Parameters
 
 ### Pagination
-Many endpoints support pagination using these query parameters:
-- `page`: Page number (starts from 1)
-- `limit`: Number of items per page
-Example: `/api/boards?page=1&limit=10`
+- `page` – Page number (starting from 1)
+- `limit` – Items per page
 
-### Search Parameters
-#### Boards Search
-- `/api/boards/search?name=MyBoard&description=Test`
-Parameters:
-- `name`: Search by board name
-- `description`: Search by board description
+Example:
+```bash
+/api/boards?page=1&limit=10
+```
 
-#### Cards Search
-- `/api/cards/search?title=Task&label=important&due=2024-02-20`
-Parameters:
-- `title`: Search by card title
-- `description`: Search by card description
-- `label`: Filter by label
-- `due`: Filter by due date
+### Search
+#### Boards
+```sql
+/api/boards/search?name=MyBoard&description=Test
+```
 
-### Sorting (Cards)
-- `sort`: Field to sort by
-- `order`: Sort order ('asc' or 'desc')
-Example: `/api/lists/{listId}/cards?sort=title&order=desc`
+#### Cards
+```arduino
+/api/cards/search?title=Task&label=important&due=2024-02-20
+```
 
-## Tech Stack
+### Sorting (Cards Only)
+- `sort` – Field name
+- `order` – asc or desc
 
-- Frontend: React, TypeScript, Tailwind CSS, Radix UI
-- Backend: Express.js, TypeScript
-- Database: PostgreSQL with Drizzle ORM
-- Documentation: Swagger/OpenAPI
-#
+Example:
+```bash
+/api/lists/{listId}/cards?sort=title&order=desc
+```
+
+## 🛠 Development Scripts
+- `npm run dev` – Start development server
+- `npm run build` – Build for production
+- `npm run preview` – Preview production build
+- `npm run lint` – Run ESLint
