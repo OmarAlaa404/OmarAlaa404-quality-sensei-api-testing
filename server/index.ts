@@ -25,11 +25,9 @@ app.use((req, res, next) => {
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
-
       if (logLine.length > 80) {
         logLine = logLine.slice(0, 79) + "…";
       }
-
       log(logLine);
     }
   });
@@ -38,10 +36,25 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Seed default user
   await seedDefaultUser();
   
   const server = await registerRoutes(app);
+
+  // ✨ Add shutdown route with secret key
+  const SHUTDOWN_SECRET = "mySuperSecret123"; // 👈 غيرها لو عايز مفتاح سري مختلف
+
+  app.get('/shutdown', (req: Request, res: Response) => {
+    const key = req.query.key;
+    if (key !== SHUTDOWN_SECRET) {
+      return res.status(403).send('Forbidden: Invalid shutdown key.');
+    }
+
+    res.status(200).send('Server is shutting down...');
+    console.log('Server is shutting down...');
+    setTimeout(() => {
+      process.exit(0);
+    }, 1000);
+  });
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
@@ -51,20 +64,14 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
-  server.listen(port, '127.0.0.1', () => {
-    log(`serving on http://127.0.0.1:${port}`);
+  const port = process.env.PORT || 5000; // 👈 عشان نسمع على البورت اللي كوييب تبعته
+  server.listen(port, () => {
+    log(`Serving on http://0.0.0.0:${port}`);
   });
 })();
